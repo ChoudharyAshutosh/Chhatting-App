@@ -27,7 +27,6 @@ io.on('connection',(socket)=>{
         socket.emit('mess',mess.toString());
     });
     socket.on('mess',(message)=>{
-        console.log('red')
         client.publish('message@789',message);
     });
     socket.on('disconnect',()=>{
