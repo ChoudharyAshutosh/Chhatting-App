@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Chatting App</title>
+    </head>
+    <body>
+        <Header>
+            <h2>Chatting With</h2>
+            <h1 id="user"></h1>
+        </Header>
+        <input type="text" id="input-box" placeholder="Enter text to send">
+        <button id="send-button">Send</button>
+        <div id="chat-history"></div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/scripts/main.js"></script>
+    </body>
+</html>
