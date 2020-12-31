@@ -11,7 +11,7 @@ app.get('/',(req,res)=>{
     res.render('index');
 });
 
-var client=mqtt.connect([{host:'localhost',port:1883}]);
+var client=mqtt.connect([{host:'mqtt.fluux.io',port:1883}]);
 client.on('connect',()=>{
     client.subscribe('communicate',(err)=>{
         if(!err)
@@ -21,14 +21,14 @@ client.on('connect',()=>{
 });
 io.on('connection',(socket)=>{
 //    console.log("Socket.io connected");
-    client.subscribe('message');
+    client.subscribe('message@456');
    
     client.on('message',(topic, mess)=>{
-        socket.emit('mess',topic.toString()+' : '+mess.toString());
+        socket.emit('mess',mess.toString());
     });
     socket.on('mess',(message)=>{
         console.log('red')
-        client.publish('messageto',message);
+        client.publish('message@789',message);
     });
     socket.on('disconnect',()=>{
 //        console.log("Socket.io disconnected");
