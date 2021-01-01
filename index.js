@@ -11,7 +11,7 @@ app.get('/',(req,res)=>{
     res.render('index');
 });
 
-var client=mqtt.connect([{host:'mqtt.fluux.io',port:1883}]);
+var client=mqtt.connect("mqtt://test.mosquitto.org:1883");
 client.on('connect',()=>{
     client.subscribe('communicate',(err)=>{
         if(!err)
