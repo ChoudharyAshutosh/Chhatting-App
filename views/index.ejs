@@ -2,16 +2,21 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="content-height:device-height;content-width=device-width;initial-scale=1.0">
         <title>Chatting App</title>
+        <link href="/styles/main.css" rel="stylesheet" >
     </head>
     <body>
-        <Header>
-            <h2>Chatting With</h2>
-            <h1 id="user"></h1>
-        </Header>
-        <input type="text" id="input-box" placeholder="Enter text to send">
-        <button id="send-button">Send</button>
-        <div id="chat-history"></div>
+        
+            <div class="h">CHAT</div>
+            <div id="chat">    
+                <div id="chat-history"></div>
+            <div id="send-control">
+                <input type="text" id="input-box" placeholder="Enter text to send">
+                <button id="send-button">Send</button>
+            </div>
+            
+        </div>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/scripts/main.js"></script>
     </body>

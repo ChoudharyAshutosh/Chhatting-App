@@ -1,0 +1,114 @@
+
+body{
+    position:absolute;
+    width:100%;
+    height: 100%;
+    margin: 0px;
+    background: rgb(42, 42, 184);
+    padding: 0%;
+}
+.header{
+    text-align: Right;
+    background-color:greenyellow;
+    margin-top: 0%;
+    margin: 0px;
+}
+.h{    background-color:greenyellow;
+    font-size: 200%;
+    text-align: left;
+    font-style: italic;
+    color:black;
+    letter-spacing:0.2rem;
+    text-transform: uppercase;
+    font-weight : bold;
+    padding-top: 1%;
+}
+#chat{
+    display:flex;   
+     flex-direction: column;
+    justify-content: flex-end;
+     width:100%;
+     height: 90%;
+}
+ #send-control{
+    margin-top: 1%;
+} 
+#chat-history{
+    overflow-y:scroll;
+    font-size: 125%;
+    font-family:cursive;
+    color:blue;
+}
+#input-box{
+    padding: 1% 0% 1% 0%;
+    font-family:cursive;
+    
+    font-size: 125%;
+    border-radius: 15px;
+    width:90%;
+}
+#send-button{
+    width:9%;
+    font-family: cursive;
+    padding: 0.9% 0% 0.9% 0%;
+    font-size: 120%;
+    color: blue;
+    letter-spacing:0.2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: lightgreen;
+    border-radius: 15px;
+    outline: none;
+}
+ p{
+    padding:0.5% 0.5%;
+    min-width: 30%;
+    max-width:60%;
+    
+} 
+#left{
+    color: rgb(73, 22, 97);
+    height:fit-content;
+    text-align:left;
+    background-color:rgb(151, 145, 170);
+    overflow-wrap: break-word;
+    border-radius: 10px;
+    height:fit-content;
+    text-align:right;
+}
+#right{
+    height:fit-content;
+    color:blue;
+    overflow-wrap: break-word;
+    border-radius: 10px;
+    background-color:rgb(151, 145, 170);
+    text-align:left;
+}
+#left-container{
+    margin: -1.5% 0%;
+    padding:0px;
+    width:100%;
+    display: flex;
+    flex-direction:row;
+}
+#right-container{
+    margin: -1.5% 0%;
+    width:100%;
+     display: flex;
+    flex-direction:row-reverse;
+}
+@font-face {
+    font-family: 'Marck Script';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Marck Script'), local('MarckScript-Regular'), url(https://fonts.gstatic.com/s/marckscript/v11/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2) format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+  
+  @font-face {
+    font-family: 'Satisfy';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Satisfy Regular'), local('Satisfy-Regular'), url(https://fonts.gstatic.com/s/satisfy/v11/rP2Hp2yn6lkG50LoCZOIHQ.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
