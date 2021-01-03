@@ -6,17 +6,30 @@
         <title>Chatting App</title>
         <link href="/styles/main.css" rel="stylesheet" >
     </head>
-    <body>
-        
+    <body onresize="update();" onload="update();">
+        <div id="show-connections" class="show">
+            <div class="search-pannel">
+                <div class="h">Welcome</div>
+                <input type="text" id="search-box" autofocus="autofocus" placeholder="Search here">
+            <button id="search-button" class="button">Search</button>
+            </div>
+            <div id="users">
+            <div class="user-chat-link">Ashutosh Choudhary</div>
+            </div>
+        </div>
+        <div id="show-chat" class="show">   
             <div class="h">CHAT</div>
-            <div id="chat">    
+            <div><button id="back-button" class="button">Back</button></div>
+            <div id="chat">
                 <div id="chat-history"></div>
             <div id="send-control">
-                <input type="text" id="input-box" placeholder="Enter text to send">
-                <button id="send-button">Send</button>
+                <input type="text" id="input-box" autofocus="autofocus" placeholder="Enter text to send">
+                <button id="send-button" class="button">Send</button>
             </div>
             
         </div>
+    </div>
+    
         <script src="/socket.io/socket.io.js"></script>
         <script src="/scripts/main.js"></script>
     </body>
