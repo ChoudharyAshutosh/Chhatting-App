@@ -11,9 +11,15 @@ var historyArray=[];
     else
     sendbutton.innerHTML="Send";
     if(screen.width<930 || window.outerWidth<930)
-    searchbutton.innerHTML="&#8605";
+    searchbutton.innerHTML="<i class='fa fa-search'></i>";
     else
     searchbutton.innerHTML="Search";
+}
+function move(){
+    document.getElementById('show-connections').style.display="none";
+        document.getElementById('show-chat').style.display="";
+        document.getElementsByTagName('body')[0].style.backgroundColor="rgb(42, 42, 184)";
+        inputText.focus();
 } 
 (()=>{
     var socket=io();
@@ -54,7 +60,6 @@ var historyArray=[];
     inputText.addEventListener('keyup',(event)=>{
         if(event.keyCode===13){
             var message=inputText.value;
-            
             inputText.value="";
             if(message==="")
             return;
@@ -86,5 +91,65 @@ var historyArray=[];
         document.getElementById('show-connections').style.display="none";
         document.getElementById('show-chat').style.display="";
         document.getElementsByTagName('body')[0].style.backgroundColor="rgb(42, 42, 184)";
+        inputText.focus();
     });
+    var addButton=document.getElementById('add-connection');
+    addButton.addEventListener('click',()=>{
+        document.getElementById('add-modal').style.display='block';
+        document.getElementById('new-user-name').focus();
+    });
+    var searchButton=document.getElementById('search-button');
+    searchButton.addEventListener('click',()=>{
+       
+    });
+    var modal=document.getElementById('add-modal');
+    var close=document.getElementsByClassName('close')[0];
+        close.addEventListener('click',()=>{
+            modal.style.display='none';
+        });
+    var cancel=document.getElementsByClassName('cancel')[0];
+        cancel.addEventListener('click',()=>{
+            modal.style.display='none';
+        });
+    var addUser=document.getElementById('add-user-button');
+    addUser.addEventListener('click',()=>{
+           var name=document.getElementById('new-user-name').value;
+            document.getElementById('new-user-name').value="";
+            modal.style.display='none';
+            if(name==='')
+            return;
+            let i=0;
+            for(va of name){
+                if(va===' ')
+                    i=i+1;
+            } 
+            if(i===name.length)
+               return;
+            let users=document.getElementById('users');
+            users.innerHTML+='<div class="user-chat-link" onclick="move();">'+name+'</div>';
+    });
+    var newUser=document.getElementById('new-user-name');
+    newUser.addEventListener('keyup',(event)=>{
+        if(event.keyCode==13){
+        var name=newUser.value;
+            newUser.value="";
+            modal.style.display='none';
+            if(name==='')
+            return;
+            let i=0;
+            for(va of name){
+                if(va===' ')
+                    i=i+1;
+            } 
+            if(i===name.length)
+               return;
+            let users=document.getElementById('users');
+            users.innerHTML+='<div class="user-chat-link" onclick="move();">'+name+'</div>';
+        }
+    });
+    window.addEventListener('click',(event)=> {
+            if (event.target == document.getElementById('add-modal')) {
+              document.getElementById('add-modal').style.display = "none";
+            }});
+          
 })();

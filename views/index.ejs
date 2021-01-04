@@ -5,6 +5,8 @@
         <meta name="viewport" content="content-height:device-height;content-width=device-width;initial-scale=1.0">
         <title>Chatting App</title>
         <link href="/styles/main.css" rel="stylesheet" >
+        <link href="/styles/modal.css" rel="stylesheet" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body onresize="update();" onload="update();">
         <div id="show-connections" class="show">
@@ -13,10 +15,27 @@
                 <input type="text" id="search-box" autofocus="autofocus" placeholder="Search here">
             <button id="search-button" class="button">Search</button>
             </div>
+            <div><button id="add-connection">+</button></div>
             <div id="users">
-            <div class="user-chat-link">Ashutosh Choudhary</div>
+            <div class="user-chat-link" onclick="move();">Ashutosh Choudhary</div>
             </div>
         </div>
+        <div class="modal" id="add-modal">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1>add connection</h1>
+                <span class="close">&nbsp;&nbsp;&times;&nbsp;&nbsp;</span>
+            </div>
+            <div class="modal-body">
+                <label for="new-user-name">Name</label>
+                <input type="text" id="new-user-name" placeholder="Enter name">
+            </div>
+            <div class="modal-footer">
+                <button class="cancel">cancel</button>
+                <button id='add-user-button' >add</button>
+            </div>
+        </div>
+    </div >
         <div id="show-chat" class="show">   
             <div class="h">CHAT</div>
             <div><button id="back-button" class="button">Back</button></div>
