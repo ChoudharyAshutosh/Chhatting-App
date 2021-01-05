@@ -9,6 +9,22 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body onresize="update();" onload="update();">
+        <div class="modal" id="sign-modal">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1>Sign in</h1>
+            </div>
+            <div class="modal-body">
+                <label for="login-user-name">Name</label>
+                <input type="text" id="login-user-name" placeholder="Enter name" autofocus='autofocus'>
+                <label for="login-user-password">Name</label>
+                <input type="password" id="login-user-pasword" placeholder="Enter password">
+            </div>
+            <div class="modal-footer">
+                <button id='sign-user-button' >Sign in</button>
+            </div>
+        </div>
+    </div >
         <div id="show-connections" class="show">
             <div class="search-pannel">
                 <div class="h">Welcome</div>
@@ -51,5 +67,6 @@
     
         <script src="/socket.io/socket.io.js"></script>
         <script src="/scripts/main.js"></script>
+        <script src="/scripts/modal.js"></script>
     </body>
 </html>

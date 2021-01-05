@@ -86,3 +86,15 @@
     cursor: pointer;
     text-decoration: none;
 }
+#sign-modal{
+    display:block;
+}
+#sign-user-button{
+    background-color: green;
+    font-size: 2rem;
+    width:100%;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+}
+
