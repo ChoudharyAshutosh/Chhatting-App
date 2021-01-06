@@ -1,5 +1,3 @@
-var historyArray=[];
-var chattingWith='';
 function updateChange(){
     let sendbutton=document.getElementById('send-button');
     let searchbutton=document.getElementById('search-button');
@@ -98,9 +96,6 @@ function move(value){
     addButton.addEventListener('click',()=>{
         document.getElementById('add-modal').style.display='block';
         document.getElementById('new-user-name').focus();
-    });
-    var searchButton=document.getElementById('search-button');
-    searchButton.addEventListener('click',()=>{
     });
           
 })();

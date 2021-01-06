@@ -129,5 +129,50 @@ var userList=[];
                 addConnectionModel.style.display = "none";
             }
         });
-
+        var searchButton=document.getElementById('search-button');
+        var searchBar=document.getElementById('search-box');
+        searchButton.addEventListener('click',()=>{
+            let searched=searchBar.value;
+            let deleteIndex=-1;
+            searchBar.value='';
+            userList.forEach((value, index)=>{
+                if(value==searched)
+                deleteIndex=index;
+            });
+            if(deleteIndex != -1){
+                userList.splice(deleteIndex,1);
+                userList.push(searched);
+                document.getElementById('users').innerHTML='';
+                userList.forEach(user => {
+                    if(user!='')
+                     document.getElementById('users').innerHTML+='<div class="user-chat-link" onclick="move(innerHTML);">'+user+'</div>'
+                    });          
+                socket.emit('new user',userList);            
+            }
+            else
+            alert('Not found')
+        });
+    searchBar.addEventListener('keyup',(event)=>{
+        if(event.keyCode===13){
+            let searched=searchBar.value;
+            let deleteIndex=-1;
+            searchBar.value='';
+            userList.forEach((value, index)=>{
+                if(value==searched)
+                deleteIndex=index;
+            });
+            if(deleteIndex != -1){
+                userList.splice(deleteIndex,1);
+                userList.push(searched);
+                document.getElementById('users').innerHTML='';
+                userList.forEach(user => {
+                    if(user!='')
+                     document.getElementById('users').innerHTML+='<div class="user-chat-link" onclick="move(innerHTML);">'+user+'</div>'
+                    });          
+                socket.emit('new user',userList);            
+            }
+            else
+            alert('Not found')
+        }
+    });
 })();
