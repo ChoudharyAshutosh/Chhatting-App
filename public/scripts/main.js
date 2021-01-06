@@ -1,10 +1,9 @@
 var historyArray=[];
- function update(){
-    document.getElementsByTagName('body')[0].style.backgroundColor="green";
-    document.getElementById('show-chat').style.display="none";
+var chattingWith='';
+function updateChange(){
     let sendbutton=document.getElementById('send-button');
     let searchbutton=document.getElementById('search-button');
-    console.log(screen.width, window.outerWidth);
+//    console.log(screen.width, window.outerWidth);
     if(screen.width<820 || window.outerWidth<820)
     sendbutton.innerHTML="&#8605";
     else
@@ -13,12 +12,32 @@ var historyArray=[];
     searchbutton.innerHTML="<i class='fa fa-search'></i>";
     else
     searchbutton.innerHTML="Search";
+};
+ function update(){
+    var socket=io();
+     document.getElementsByTagName('body')[0].style.backgroundColor="green";
+    document.getElementById('show-chat').style.display="none";
+//    console.log('sending request to index')
 }
-function move(){
+function move(value){
+    var socket=io();
+    let chatHistory=document.getElementById('chat-history');
     document.getElementById('show-connections').style.display="none";
         document.getElementById('show-chat').style.display="";
         document.getElementsByTagName('body')[0].style.backgroundColor="rgb(42, 42, 184)";
-        inputText.focus();
+        document.getElementById('input-box').focus();
+        chattingWith=value;
+        socket.emit('chat history',chattingWith);
+        socket.on('history',(data)=>{
+            data=data.toString();
+//            console.log(data)
+            if(data=='null')
+            {document.getElementById('chat-history').innerHTML='';
+            return;}
+        chatHistory.innerHTML=data;            
+        chatHistory.scrollTo(0, chatHistory.scrollHeight);
+    });
+//        console.log(chattingWith);
 } 
 (()=>{
     var socket=io();
@@ -28,11 +47,9 @@ function move(){
     var sendButton=document.getElementById('send-button');
     var backButton=document.getElementById('back-button');
     socket.on('mess',(message)=>{
-        history.innerHTML="";
-        historyArray.push('<div id="left-container"><p id="left">'+message+'</p></div>');
-        historyArray.forEach((hist, index)=>{
-            history.innerHTML+=hist;   
-        });
+        socket.emit('user chat',chattingWith+':'+'<div id="left-container"><p id="left">'+message+'</p></div>');
+        history.innerHTML+='<div id="left-container"><p id="left">'+message+'</p></div>';
+        history.scrollTo(0, history.scrollHeight);
     });
     sendButton.addEventListener("click",function(){
         var message=inputText.value;
@@ -46,13 +63,9 @@ function move(){
         } 
         if(i===message.length)
            return;
-        
         socket.emit('mess',message);
-        history.innerHTML="";
-        historyArray.push('<div id="right-container"><p id="right">'+message+'</p></div>');
-        historyArray.forEach((hist, index)=>{
-            history.innerHTML+=hist; 
-        });
+        socket.emit('user chat',chattingWith+':'+'<div id="right-container"><p id="right">'+message+'</p></div>');
+        history.innerHTML+='<div id="right-container"><p id="right">'+message+'</p></div>';
         history.scrollTo(0, history.scrollHeight);
         inputText.focus();
     });
@@ -69,28 +82,17 @@ function move(){
         } 
         if(i===message.length)
            return;
-        
             socket.emit('mess',message);
-            history.innerHTML="";
-            historyArray.push('<div id="right-container"><p id="right">'+message+'</p></div>');
-            historyArray.forEach((hist, index)=>{
-                history.innerHTML+=hist; 
-            }); 
+            socket.emit('user chat',chattingWith+':'+'<div id="right-container"><p id="right">'+message+'</p></div>');
+            history.innerHTML+='<div id="right-container"><p id="right">'+message+'</p></div>';
+            history.scrollTo(0, history.scrollHeight);
         }
-        history.scrollTo(0, history.scrollHeight);
     });
     backButton.addEventListener('click',()=>{
         document.getElementById('show-chat').style.display="none";
         document.getElementById('show-connections').style.display="flex";
         document.getElementsByTagName('body')[0].style.backgroundColor="darkgreen";
         document.getElementById('search-box').focus();
-    });
-    var userChat=document.getElementsByClassName('user-chat-link')[0];
-    userChat.addEventListener('click',()=>{
-        document.getElementById('show-connections').style.display="none";
-        document.getElementById('show-chat').style.display="";
-        document.getElementsByTagName('body')[0].style.backgroundColor="rgb(42, 42, 184)";
-        inputText.focus();
     });
     var addButton=document.getElementById('add-connection');
     addButton.addEventListener('click',()=>{
@@ -99,7 +101,6 @@ function move(){
     });
     var searchButton=document.getElementById('search-button');
     searchButton.addEventListener('click',()=>{
-       
     });
           
 })();

@@ -2,13 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="content-height:device-height;content-width=device-width;initial-scale=1.0">
+        <meta name="viewport" content="content-height:device-height,content-width=device-width,initial-scale=1.0">
         <title>Chatting App</title>
         <link href="/styles/main.css" rel="stylesheet" >
         <link href="/styles/modal.css" rel="stylesheet" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body onresize="update();" onload="update();">
+    <body onresize="updateChange();" onload="update();">
         <div class="modal" id="sign-modal">
             <div class="modal-content">
             <div class="modal-header">
@@ -17,8 +17,8 @@
             <div class="modal-body">
                 <label for="login-user-name">Name</label>
                 <input type="text" id="login-user-name" placeholder="Enter name" autofocus='autofocus'>
-                <label for="login-user-password">Name</label>
-                <input type="password" id="login-user-pasword" placeholder="Enter password">
+                <label for="login-user-password">Password</label>
+                <input type="password" id="login-user-password" placeholder="Enter password">
             </div>
             <div class="modal-footer">
                 <button id='sign-user-button' >Sign in</button>
@@ -33,7 +33,6 @@
             </div>
             <div><button id="add-connection">+</button></div>
             <div id="users">
-            <div class="user-chat-link" onclick="move();">Ashutosh Choudhary</div>
             </div>
         </div>
         <div class="modal" id="add-modal">

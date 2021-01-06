@@ -1,100 +1,100 @@
-.modal{
-    display: none;
-    position: fixed;
-    z-index:1;
-    padding-top:10%;
-    left:0;
-    top:0;
-    width:100%;
-    height: 100%;
-    overflow:auto;
-    background-color: rgb(60, 9, 247);
-    background-color: rgb(60, 9, 247,0.4);
-}
-.modal-header{
-    padding: 0.2%;
-    border-bottom: 2px solid blue;
-}
-.modal-content{
-    background-color: #fefefe;
-    margin: auto;
-    border: 1kx solid #888;
-    width:80%;
-}
-.modal-header h1{
-    color: rgb(50, 35, 134);
-    display: inline;
-    text-transform: uppercase;
-}
-.modal-body{
-    padding: 1%;
-}
-.modal-body input{
-    width: 99%;
-    font-family: cursive;
-    border-radius: 15px;
-    font-size:2rem;
-    outline: none;
-}
-.modal-body label{
-    font-size: 2rem;
-    font-family: cursive;
-    display: inline-block;
-}
-.modal-footer{
-    padding: 1%;
-    direction:rtl;
-}
-.modal-footer button{
-    width: 49.75%;
-    padding: 0% 0%;
-    font-family: cursive;
-    border-radius: 15px;
-    outline:none;
-}
-.close{ 
-    background-color: red;
-    color: white;
-    margin-right: 0%;
-    float: right;
-    font-size: 2rem;
-    font-weight: bolder;
-}
-.close:hover,.close:focus{
-    cursor: pointer;
-    text-decoration: none;
-}
-.modal-footer .close{
-    background-color: red;
-    color:black;
-}
-.modal-footer .add-user-button{
-    background-color: green;
-    color:white;
-} 
-.cancel{
-    background-color: red;
-    font-size: 2rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    text-decoration: none;
-}
-#add-user-button{
-    background-color: green;
-    font-size: 2rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    text-decoration: none;
-}
-#sign-modal{
-    display:block;
-}
-#sign-user-button{
-    background-color: green;
-    font-size: 2rem;
-    width:100%;
-    text-transform: uppercase;
-    cursor: pointer;
-    text-decoration: none;
-}
+    .modal{
+        display: none;
+        position: fixed;
+        z-index:1;
+        padding-top:10%;
+        left:0;
+        top:0;
+        width:100%;
+        height: 100%;
+        overflow:auto;
+        background-color: rgb(60, 9, 247);
+        background-color: rgb(60, 9, 247,0.4);
+    }
+    .modal-header{
+        padding: 0.2%;
+        border-bottom: 2px solid blue;
+    }
+    .modal-content{
+        background-color: #fefefe;
+        margin: auto;
+        border: 1kx solid #888;
+        width:80%;
+    }
+    .modal-header h1{
+        color: rgb(50, 35, 134);
+        display: inline;
+        text-transform: uppercase;
+    }
+    .modal-body{
+        padding: 1%;
+    }
+    .modal-body input{
+        width: 99%;
+        font-family: cursive;
+        border-radius: 15px;
+        font-size:2rem;
+        outline: none;
+    }
+    .modal-body label{
+        font-size: 2rem;
+        font-family: cursive;
+        display: inline-block;
+    }
+    .modal-footer{
+        padding: 1%;
+        direction:rtl;
+    }
+    .modal-footer button{
+        width: 49.75%;
+        padding: 0% 0%;
+        font-family: cursive;
+        border-radius: 15px;
+        outline:none;
+    }
+    .close{ 
+        background-color: red;
+        color: white;
+        margin-right: 0%;
+        float: right;
+        font-size: 2rem;
+        font-weight: bolder;
+    }
+    .close:hover,.close:focus{
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .modal-footer .close{
+        background-color: red;
+        color:black;
+    }
+    .modal-footer .add-user-button{
+        background-color: green;
+        color:white;
+    } 
+    .cancel{
+        background-color: red;
+        font-size: 2rem;
+        cursor: pointer;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+    #add-user-button{
+        background-color: green;
+        font-size: 2rem;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    #sign-modal{
+        display:block;
+    }
+    #sign-user-button{
+        background-color: green;
+        font-size: 2rem;
+        width:100%;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-decoration: none;
+    }
 
