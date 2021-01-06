@@ -38,7 +38,7 @@ io.on('connection',(socket)=>{
             }
         });
         let list=message.toString().split(',');
-        fs.writeFile('./data/'+list[list.length-1]+'.txt','',(error)=>{
+        fs.writeFile('./data/'+list[list.length-1]+'.txt','',(err)=>{
             if(err)
             console.error(err);
         });
