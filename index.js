@@ -12,7 +12,7 @@ app.get('/',(req,res)=>{
     res.render('index');
 });
 var uniqueKey;
-var client=mqtt.connect("mqtt:localhost:1883");
+var client=mqtt.connect("mqtt:mqtt.fluux.io:1883");
 client.on('connect',()=>{
  });
 io.on('connection',(socket)=>{
