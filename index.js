@@ -12,13 +12,13 @@ app.get('/',(req,res)=>{
     res.render('index');
 });
 
-var client=mqtt.connect("mqtt://test.mosquitto.org:1883");
+var client=mqtt.connect("mqtt:mqtt.fluux.io:1883");
 client.on('connect',()=>{
-    client.subscribe('communicate',(err)=>{
+/*     client.subscribe('communicate',(err)=>{
         if(!err)
         client.publish('communicate','MQTT Hello');
     });
-    client.unsubscribe('communicate');
+ */   // client.unsubscribe('communicate');
 });
 io.on('connection',(socket)=>{
 //    console.log("Socket.io connected");
