@@ -3,14 +3,12 @@ var userList=[];
     var socket=io();
      socket.emit('userlist update','vcxv');
      socket.on('user list',(message)=>{
-//        console.log('received')
         userList=message.toString().split(',');
         if(userList!='')
         userList.forEach(user => {
         if(user!='')
          document.getElementById('users').innerHTML+='<div class="user-chat-link" onclick="move(innerHTML);">'+user+'</div>'
         });
-//        console.log(userList);
     });
     var addConnectionModel=document.getElementById('add-modal');
     var signModel=document.getElementById('sign-modal');
@@ -64,6 +62,7 @@ var userList=[];
     });
     var loginName=document.getElementById('login-user-name');
     var loginPassword=document.getElementById('login-user-password');
+    var uniqueKey=document.getElementById('unique-key');
     var loggingUserName="";
     var loggingUserPassword="";    
     loginName.addEventListener('keyup',()=>{
@@ -79,7 +78,23 @@ var userList=[];
                     if(i===name.length)
                        return;
                     loggingUserName=name;
-                    loginPassword.focus();
+                    uniqueKey.focus();
+                    }
+        });
+        uniqueKey.addEventListener('keyup',()=>{
+            if(event.keyCode==13){
+                let key=uniqueKey.value;
+                    if(key==='')
+                    return;
+                    let i=0;
+                    for(va of key){
+                        if(va===' ')
+                            i=i+1;
+                    } 
+                    if(i===key.length)
+                       return;
+                    socket.emit('unique-key',key);
+                       loginPassword.focus();
                     }
         });
     loginPassword.addEventListener('keyup',()=>{

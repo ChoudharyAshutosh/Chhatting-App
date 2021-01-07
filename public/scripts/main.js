@@ -1,7 +1,6 @@
 function updateChange(){
     let sendbutton=document.getElementById('send-button');
     let searchbutton=document.getElementById('search-button');
-//    console.log(screen.width, window.outerWidth);
     if(screen.width<820 || window.outerWidth<820)
     sendbutton.innerHTML="&#8605";
     else
@@ -12,31 +11,26 @@ function updateChange(){
     searchbutton.innerHTML="Search";
 };
  function update(){
-    var socket=io();
      document.getElementsByTagName('body')[0].style.backgroundColor="green";
     document.getElementById('show-chat').style.display="none";
-//    console.log('sending request to index')
 }
 function move(value){
     var socket=io();
     let chatHistory=document.getElementById('chat-history');
     document.getElementById('show-connections').style.display="none";
-        
         chattingWith=value;
         socket.emit('chat history',chattingWith);
         socket.on('history',(data)=>{
             data=data.toString();
-//            console.log(data)
             if(data=='null')
             {document.getElementById('chat-history').innerHTML='';
             return;}
         chatHistory.innerHTML=data;            
-        chatHistory.scrollTo(0, chatHistory.scrollHeight);
         document.getElementById('show-chat').style.display="";
         document.getElementsByTagName('body')[0].style.backgroundColor="rgb(42, 42, 184)";
+        chatHistory.scrollTo(0, chatHistory.scrollHeight);
         document.getElementById('input-box').focus();
     });
-//        console.log(chattingWith);
 } 
 (()=>{
     var socket=io();
@@ -46,9 +40,14 @@ function move(value){
     var sendButton=document.getElementById('send-button');
     var backButton=document.getElementById('back-button');
     socket.on('mess',(message)=>{
-        socket.emit('user chat',chattingWith+':'+'<div id="left-container"><p id="left">'+message+'</p></div>');
-        history.innerHTML+='<div id="left-container"><p id="left">'+message+'</p></div>';
-        history.scrollTo(0, history.scrollHeight);
+        message=message.split(':');
+        userList.forEach(element => {
+            if(element == message[0] && element!=''){
+                socket.emit('user chat',message[0]+':'+'<div id="left-container"><p id="left">'+message[1]+'</p></div>');
+                if(chattingWith==message[0])
+                history.innerHTML+='<div id="left-container"><p id="left">'+message[1]+'</p></div>';
+                history.scrollTo(0, history.scrollHeight);}
+        });
     });
     sendButton.addEventListener("click",function(){
         var message=inputText.value;
@@ -62,7 +61,7 @@ function move(value){
         } 
         if(i===message.length)
            return;
-        socket.emit('mess',message);
+        socket.emit('mess',chattingWith+':'+message);
         socket.emit('user chat',chattingWith+':'+'<div id="right-container"><p id="right">'+message+'</p></div>');
         history.innerHTML+='<div id="right-container"><p id="right">'+message+'</p></div>';
         history.scrollTo(0, history.scrollHeight);
@@ -81,7 +80,7 @@ function move(value){
         } 
         if(i===message.length)
            return;
-            socket.emit('mess',message);
+            socket.emit('mess',chattingWith+':'+message);
             socket.emit('user chat',chattingWith+':'+'<div id="right-container"><p id="right">'+message+'</p></div>');
             history.innerHTML+='<div id="right-container"><p id="right">'+message+'</p></div>';
             history.scrollTo(0, history.scrollHeight);

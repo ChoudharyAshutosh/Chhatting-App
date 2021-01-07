@@ -11,61 +11,61 @@ app.use(express.static(__dirname + '/public'));
 app.get('/',(req,res)=>{
     res.render('index');
 });
-
-var client=mqtt.connect("mqtt:mqtt.fluux.io:1883");
+var uniqueKey;
+var client=mqtt.connect("mqtt:localhost:1883");
 client.on('connect',()=>{
-/*     client.subscribe('communicate',(err)=>{
-        if(!err)
-        client.publish('communicate','MQTT Hello');
-    });
- */   // client.unsubscribe('communicate');
-});
+ });
 io.on('connection',(socket)=>{
 //    console.log("Socket.io connected");
-    client.subscribe('message@456');
-   
     client.on('message',(topic, mess)=>{
-        socket.emit('mess',mess.toString());
+        mess=mess.toString().split('$');
+        if(mess[1]!=uniqueKey)
+        socket.emit('mess',mess[0].toString());
     });
     socket.on('mess',(message)=>{
-        client.publish('message@789',message);
+        message=message.split(':');
+        client.publish(message[0],message[0]+':'+message[1]+'$'+uniqueKey,(err)=>{
+            if(err)
+            console.error(err)
+        });
+    });
+    socket.on('unique-key',(key)=>{
+        uniqueKey=key;
     });
     socket.on('new user',(message)=>{
-//        console.log(message);
         fs.writeFile('./data/userlist.txt',message,(err)=>{
             if(err){
                 return console.error(err);
             }
         });
         let list=message.toString().split(',');
-        fs.writeFile('./data/'+list[list.length-1]+'.txt','',(err)=>{
+        client.subscribe(list[list.length-1],err=>{
             if(err)
             console.error(err);
         });
-/*         fs.readFile('./data/userlist.txt',(err, data)=>{
+        fs.writeFile('./data/'+list[list.length-1]+'.txt','',(err)=>{
             if(err)
-            return console.error(err);
-            console.log(data.toString().split('$'));
-        }); */
-    
+            console.error(err);
+        });    
     });
     socket.on('userlist update',(message)=>{
-/*         console.log('request received')
-        console.log(message);
- */        fs.readFile('./data/userlist.txt',(err, data)=>{
+        fs.readFile('./data/userlist.txt',(err, data)=>{
             if(err)
             return console.error(err);
-            socket.emit('user list',data.toString().split('$'));
-//            console.log('sendind data to update');
-            
-//            console.log(data.toString());
+            let users=data.toString().split(',');
+            users.forEach(user=>{
+                if(user!='')
+                client.subscribe(user,(err)=>{
+                    if(err)
+                    console.error(err)
+                });
+            });
+            socket.emit('user list',data.toString());
         });
     });
     socket.on('chat history',(connection)=>{
-//        console.log(connection.toString()+' user')
         fs.readFile('./data/'+connection.toString()+'.txt',(err, data)=>{
             socket.emit('history',data.toString());
-//            console.log(data.toString())
         });
     });
     socket.on('user chat',(message)=>{
@@ -76,7 +76,6 @@ io.on('connection',(socket)=>{
             console.error(err);
             if(data.toString()=='null')
             {isnull=true;
-//                console.log(true);
             }
             else
             isnull=false;
@@ -91,10 +90,8 @@ io.on('connection',(socket)=>{
                 if(err)
                 console.error(err);
             });}
-//        console.log(message[1])
     });
     socket.on('disconnect',()=>{
-//        console.log("Socket.io disconnected");
     });
 });
 server.listen(3000,()=>{
