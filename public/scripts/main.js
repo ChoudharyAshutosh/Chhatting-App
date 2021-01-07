@@ -21,9 +21,7 @@ function move(value){
     var socket=io();
     let chatHistory=document.getElementById('chat-history');
     document.getElementById('show-connections').style.display="none";
-        document.getElementById('show-chat').style.display="";
-        document.getElementsByTagName('body')[0].style.backgroundColor="rgb(42, 42, 184)";
-        document.getElementById('input-box').focus();
+        
         chattingWith=value;
         socket.emit('chat history',chattingWith);
         socket.on('history',(data)=>{
@@ -34,6 +32,9 @@ function move(value){
             return;}
         chatHistory.innerHTML=data;            
         chatHistory.scrollTo(0, chatHistory.scrollHeight);
+        document.getElementById('show-chat').style.display="";
+        document.getElementsByTagName('body')[0].style.backgroundColor="rgb(42, 42, 184)";
+        document.getElementById('input-box').focus();
     });
 //        console.log(chattingWith);
 } 
