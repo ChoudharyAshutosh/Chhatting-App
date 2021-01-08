@@ -165,7 +165,7 @@ button{
 }
 #users{
     display: flex;
-    height: 80%;
+    height: fit-content;
     flex-direction: column-reverse;
 }
 #back-button{
