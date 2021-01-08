@@ -33,7 +33,7 @@ io.on('connection',(socket)=>{
         client.subscribe(id);
     });
     socket.on('new user',(message)=>{
-        fs.writeFile('./data/userlist.txt',message,(err)=>{
+        fs.writeFile('./data/userlist.txt',message.toString(),(err)=>{
             if(err){
                 return console.error(err);
             }
