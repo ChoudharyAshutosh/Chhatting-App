@@ -21,7 +21,7 @@ io.on('connection',(socket)=>{
         socket.emit('mess',mess.toString());
     });
     socket.on('mess',(message)=>{
-        console.log(message)
+//        console.log(message)
         message=message.split(':');
         client.publish(message[0],uniqueId+':'+message[1],(err)=>{
             if(err)
@@ -55,7 +55,7 @@ io.on('connection',(socket)=>{
         fs.unlink('./data/'+data.toString()+'.txt',err=>{
             if(err)
             console.error(err);
-            console.log('deleted '+data.toString())
+//            console.log('deleted '+data.toString())
         });
     });
     socket.on('userlist update',(message)=>{
