@@ -7,7 +7,7 @@ var userList=[];
         if(userList!='')
         userList.forEach(user => {
         if(user!='')
-         document.getElementById('users').innerHTML+='<div class="user-chat-link" onclick="move(innerHTML);">'+user+'</div>'
+         document.getElementById('users').innerHTML+='<div class="user-chat-link-container"><div class="user-chat-link" onclick="move(innerHTML);">'+user+'</div><button class="button delete-button" onclick="deleteConnection(value)" value='+user+'><i class="fa fa-trash"></button></div>';
         });
     });
     var addConnectionModel=document.getElementById('add-modal');
@@ -35,7 +35,7 @@ var userList=[];
             if(i===name.length)
                return;
             let users=document.getElementById('users');
-            users.innerHTML+='<div class="user-chat-link" onclick="move(innerHTML);">'+name+'</div>';
+            users.innerHTML+='<div class="user-chat-link-container"><div class="user-chat-link" onclick="move(innerHTML);">'+name+'</div><button class="button delete-button" onclick="deleteConnection(value)" value='+name+'><i class="fa fa-trash"></button></div>';
                 userList.push(name);
             socket.emit('new user',userList);
     });
@@ -55,7 +55,7 @@ var userList=[];
             if(i===name.length)
                return;
             let users=document.getElementById('users');
-            users.innerHTML+='<div class="user-chat-link" onclick="move(innerHTML);">'+name+'</div>';
+            users.innerHTML+='<div class="user-chat-link-container"><div class="user-chat-link" onclick="move(innerHTML);">'+name+'</div><button class="button delete-button" onclick="deleteConnection(value)" value='+name+'><i class="fa fa-trash"></button></div>';
             userList.push(name);
             socket.emit('new user',userList);
         }
@@ -64,7 +64,8 @@ var userList=[];
     var loginPassword=document.getElementById('login-user-password');
     var uniqueId=document.getElementById('unique-id');
     var loggingUserName="";
-    var loggingUserPassword="";    
+    var loggingUserPassword="";
+    var loggingUserid='';    
     loginName.addEventListener('keyup',()=>{
             if(event.keyCode==13){
                 let name=loginName.value;
@@ -94,6 +95,7 @@ var userList=[];
                     if(i===id.length)
                        return;
                     socket.emit('unique-id',id);
+                    loggingUserid=id;
                        loginPassword.focus();
                     }
         });
@@ -114,7 +116,8 @@ var userList=[];
                    {
                     signModel.style.display='none';
                     document.getElementById('show-connections').style.display='flex';
-                   }
+                    document.getElementById('welcome-heading').innerHTML+= ' '+loggingUserid;   
+                }
                 else{
                     alert('Please enter valid user name & password.');
                     loginName.value="";
@@ -129,15 +132,17 @@ var userList=[];
     signUser.addEventListener('click',()=>{
         let loggingUserName=loginName.value;
         let loggingUserPassword=loginPassword.value;
+        let loggingUserid=uniqueId.value;
         if(loggingUserName === 'administrator' && loggingUserPassword === 'administrator')
                {     signModel.style.display='none';
                     document.getElementById('show-connections').style.display='flex';
+                    document.getElementById('welcome-heading').innerHTML+= ' '+loggingUserid;
                 }
         else{
             alert('Please enter valid user name & password.');
             loginName.value="";
             loginPassword.value="";
-            uniqueId='';
+            uniqueId.value='';
             loginName.focus();
         }
     });
@@ -162,7 +167,7 @@ var userList=[];
                 document.getElementById('users').innerHTML='';
                 userList.forEach(user => {
                     if(user!='')
-                     document.getElementById('users').innerHTML+='<div class="user-chat-link" onclick="move(innerHTML);">'+user+'</div>'
+                    document.getElementById('users').innerHTML+='<div class="user-chat-link-container"><div class="user-chat-link" onclick="move(innerHTML);">'+user+'</div><button class="button delete-button" onclick="deleteConnection(value)" value='+user+'><i class="fa fa-trash"></button></div>';
                     });          
                 socket.emit('new user',userList);            
             }
@@ -184,7 +189,7 @@ var userList=[];
                 document.getElementById('users').innerHTML='';
                 userList.forEach(user => {
                     if(user!='')
-                     document.getElementById('users').innerHTML+='<div class="user-chat-link" onclick="move(innerHTML);">'+user+'</div>'
+                    document.getElementById('users').innerHTML+='<div class="user-chat-link-container"><div class="user-chat-link" onclick="move(innerHTML);">'+user+'</div><button class="button delete-button" onclick="deleteConnection(value)" value='+user+'><i class="fa fa-trash"></button></div>';
                     });          
                 socket.emit('new user',userList);            
             }

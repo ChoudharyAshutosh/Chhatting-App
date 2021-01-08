@@ -4,7 +4,12 @@ body{
     width:100%;
     height: 100%;
     margin: 0px;
-    background: rgb(42, 42, 184);
+    background: #cccccc;
+    background-image: url('../images/662737.jpg');
+    background-position:top;
+    background-size: 100%; 
+  background-repeat: no-repeat;
+  background-size:center;
     padding: 0%;
 }
 body::-webkit-scrollbar-track
@@ -32,16 +37,19 @@ body::-webkit-scrollbar-thumb
 }
 .header{
     text-align: Right;
-    background-color:greenyellow;
+    background-color: rgb(241,245,245,0.3);
     margin-top: 0%;
     margin: 0px;
+    box-shadow: black;
 }
 .h{ 
-    background-color:greenyellow;
+    background-color:#07070a;
+    border-bottom: 2px solid black;
+    opacity: 0.7;
     font-size: 200%;
     text-align: left;
     font-style: italic;
-    color:black;
+    color:white;
     letter-spacing:0.2rem;
     text-transform: uppercase;
     font-weight : bold;
@@ -65,12 +73,20 @@ body::-webkit-scrollbar-thumb
     font-family:cursive;
     color:blue;
 }
+.user-chat-link-container{
+    vertical-align: middle;
+    background-color: rgb(168, 184, 168,0.3);
+    /* opacity: 0.3; */
+    border-bottom: 2px solid black;
+  
+}
 .user-chat-link{
+    display:inline-block;
   font-size: 2rem;
-  font-family: cursive;
-  border-bottom: 2px solid black;
-  color:rgb(22, 122, 236);
-  background-color: lightgreen;
+  width:89.5%;
+/*   background-color: brown;
+ */  font-family: cursive;
+  color:darkblue;
   text-transform: capitalize;
   padding:1% 0%;
     cursor: pointer;
@@ -105,6 +121,7 @@ body::-webkit-scrollbar-thumb
     font-family:cursive;
     margin-left: 0.2%;
     outline: none;
+    opacity: 0.3;
     font-size: 120%;
     border-radius: 15px;
     width:90%;
@@ -117,6 +134,7 @@ body::-webkit-scrollbar-thumb
     outline: none;
     font-size: 120%;
     border-radius: 15px;
+    opacity: 0.3;
     width:90%;
 }
 button{
@@ -129,9 +147,21 @@ button{
 .button:hover, .button:focus{
     text-decoration: none;
 }
+.delete-button{
+    outline: none;
+    color:red;
+    background-color: rgb(136, 135, 210,0);
+    border: none;
+    text-decoration: none;
+/*  */    float: right;
+padding-right: 1%;
+    font-size: 2rem;
+     margin: 1% 0%;
+ }
 #send-button{
     width:9%;
     float:right;
+    opacity: 0.6;
     padding: 1% 0% 1% 0%;
     font-size: 120%;
     margin-right: 0.2%;
@@ -142,6 +172,7 @@ button{
 }
 #search-button{
     width:9%;
+    opacity: 0.6;
     float:right;
     padding: 1% 0% 1% 0%;
     font-size: 120%;
@@ -157,8 +188,8 @@ button{
     display:none;
     flex-direction: column;
     height: fit-content;
-    background-color: darkgreen;
-}
+/*     background-color: darkgreen;
+ */}
 .search-pannel{
     height: fit-content;
     margin-bottom: 1%;
@@ -169,7 +200,8 @@ button{
     flex-direction: column-reverse;
 }
 #back-button{
-    background-color: rgb(216, 27, 191);
+    background-color: red;
+    opacity: 0.4;
     color:rgb(37, 41, 38);
     font-size:120%;
     border-left: none;
@@ -217,6 +249,7 @@ button{
     height: fit-content;
     float: right;
     display: flex;
+    opacity: 0.7;
     justify-content: center;
     align-items: center;
     font-size: 2.5rem;
@@ -224,11 +257,10 @@ button{
     border-top: none;
     outline:none;
     color:rgb(60, 9, 247);
-    background-color: rgb(11, 179, 245);
+    background-color: rgb(136, 135, 210,1);
     text-transform: uppercase;
-    padding:0% 0% 0.2% 0%;
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
 }
 
 @media screen and (max-width:800px){

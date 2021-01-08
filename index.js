@@ -44,6 +44,20 @@ io.on('connection',(socket)=>{
             console.error(err);
         });    
     });
+    socket.on('remove connection',message=>{
+        fs.writeFile('./data/userlist.txt',message,(err)=>{
+            if(err){
+                return console.error(err);
+            }
+        });
+    });
+    socket.on('remove chat',data=>{
+        fs.unlink('./data/'+data.toString()+'.txt',err=>{
+            if(err)
+            console.error(err);
+            console.log('deleted '+data.toString())
+        });
+    });
     socket.on('userlist update',(message)=>{
         fs.readFile('./data/userlist.txt',(err, data)=>{
             if(err)

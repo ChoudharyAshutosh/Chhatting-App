@@ -2,6 +2,7 @@ var chattingWith='';
 function updateChange(){
     let sendbutton=document.getElementById('send-button');
     let searchbutton=document.getElementById('search-button');
+    let deleteButton=document.getElementById('delete-button');
     if(screen.width<820 || window.outerWidth<820)
     sendbutton.innerHTML="&#8605";
     else
@@ -12,7 +13,7 @@ function updateChange(){
     searchbutton.innerHTML="Search";
 };
  function update(){
-     document.getElementsByTagName('body')[0].style.backgroundColor="green";
+   //  document.getElementsByTagName('body')[0].style.backgroundColor="green";
     document.getElementById('show-chat').style.display="none";
 }
 function move(value){
@@ -28,11 +29,31 @@ function move(value){
             return;}
         chatHistory.innerHTML=data;            
         document.getElementById('show-chat').style.display="";
-        document.getElementsByTagName('body')[0].style.backgroundColor="rgb(42, 42, 184)";
+        document.getElementById('user-chat-history').innerHTML=value;
+//        document.getElementsByTagName('body')[0].style.backgroundColor="#cccccc";
         chatHistory.scrollTo(0, chatHistory.scrollHeight);
         document.getElementById('input-box').focus();
     });
 } 
+function deleteConnection(user){
+    let socket=io();
+            let deleteIndex=-1;
+            userList.forEach((value, index)=>{
+                if(value==user)
+                deleteIndex=index;
+            });
+            if(deleteIndex != -1){
+                userList.splice(deleteIndex,1);
+                document.getElementById('users').innerHTML='';
+                userList.forEach(user => {
+                    if(user!='')
+                    document.getElementById('users').innerHTML+='<div class="user-chat-link-container"><div class="user-chat-link" onclick="move(innerHTML);">'+user+'</div><button class="button delete-button" onclick="deleteConnection(value)" value='+user+'><i class="fa fa-trash"></button></div>';
+                    });          
+                socket.emit('remove connection',userList);            
+                socket.emit('remove chat',user);
+            }
+    
+}
 (()=>{
     var socket=io();
    
@@ -100,7 +121,7 @@ function move(value){
     backButton.addEventListener('click',()=>{
         document.getElementById('show-chat').style.display="none";
         document.getElementById('show-connections').style.display="flex";
-        document.getElementsByTagName('body')[0].style.backgroundColor="darkgreen";
+   //     document.getElementsByTagName('body')[0].style.backgroundColor="darkgreen";
         document.getElementById('search-box').focus();
     });
     var addButton=document.getElementById('add-connection');
