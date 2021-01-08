@@ -1,3 +1,4 @@
+var chattingWith='';
 function updateChange(){
     let sendbutton=document.getElementById('send-button');
     let searchbutton=document.getElementById('search-button');
@@ -41,13 +42,23 @@ function move(value){
     var backButton=document.getElementById('back-button');
     socket.on('mess',(message)=>{
         message=message.split(':');
+        let isNewUser=true;
         userList.forEach(element => {
             if(element == message[0] && element!=''){
                 socket.emit('user chat',message[0]+':'+'<div id="left-container"><p id="left">'+message[1]+'</p></div>');
                 if(chattingWith==message[0])
-                history.innerHTML+='<div id="left-container"><p id="left">'+message[1]+'</p></div>';
+                {history.innerHTML+='<div id="left-container"><p id="left">'+message[1]+'</p></div>';
                 history.scrollTo(0, history.scrollHeight);}
+            isNewUser=false;
+            }
         });
+        if(isNewUser==true && chattingWith=='')
+        {let users=document.getElementById('users');
+        users.innerHTML+='<div class="user-chat-link" onclick="move(innerHTML);">'+message[0]+'</div>';
+            userList.push(message[0]);
+            socket.emit('new user',userList);
+            socket.emit('user chat',message[0]+':'+'<div id="left-container"><p id="left">'+message[1]+'</p></div>');
+        }
     });
     sendButton.addEventListener("click",function(){
         var message=inputText.value;

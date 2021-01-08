@@ -62,7 +62,7 @@ var userList=[];
     });
     var loginName=document.getElementById('login-user-name');
     var loginPassword=document.getElementById('login-user-password');
-    var uniqueKey=document.getElementById('unique-key');
+    var uniqueId=document.getElementById('unique-id');
     var loggingUserName="";
     var loggingUserPassword="";    
     loginName.addEventListener('keyup',()=>{
@@ -78,22 +78,22 @@ var userList=[];
                     if(i===name.length)
                        return;
                     loggingUserName=name;
-                    uniqueKey.focus();
+                    uniqueId.focus();
                     }
         });
-        uniqueKey.addEventListener('keyup',()=>{
+        uniqueId.addEventListener('keyup',()=>{
             if(event.keyCode==13){
-                let key=uniqueKey.value;
-                    if(key==='')
+                let id=uniqueId.value;
+                    if(id==='')
                     return;
                     let i=0;
-                    for(va of key){
+                    for(va of id){
                         if(va===' ')
                             i=i+1;
                     } 
-                    if(i===key.length)
+                    if(i===id.length)
                        return;
-                    socket.emit('unique-key',key);
+                    socket.emit('unique-id',id);
                        loginPassword.focus();
                     }
         });
@@ -119,6 +119,7 @@ var userList=[];
                     alert('Please enter valid user name & password.');
                     loginName.value="";
                     loginPassword.value="";
+                    uniqueId.value="";
                     loginName.focus();
                 }
                 
@@ -136,6 +137,7 @@ var userList=[];
             alert('Please enter valid user name & password.');
             loginName.value="";
             loginPassword.value="";
+            uniqueId='';
             loginName.focus();
         }
     });

@@ -11,26 +11,26 @@ app.use(express.static(__dirname + '/public'));
 app.get('/',(req,res)=>{
     res.render('index');
 });
-var uniqueKey;
+var uniqueId;
 var client=mqtt.connect("mqtt:mqtt.fluux.io:1883");
 client.on('connect',()=>{
  });
 io.on('connection',(socket)=>{
 //    console.log("Socket.io connected");
     client.on('message',(topic, mess)=>{
-        mess=mess.toString().split('$');
-        if(mess[1]!=uniqueKey)
-        socket.emit('mess',mess[0].toString());
+        socket.emit('mess',mess.toString());
     });
     socket.on('mess',(message)=>{
+        console.log(message)
         message=message.split(':');
-        client.publish(message[0],message[0]+':'+message[1]+'$'+uniqueKey,(err)=>{
+        client.publish(message[0],uniqueId+':'+message[1],(err)=>{
             if(err)
             console.error(err)
         });
     });
-    socket.on('unique-key',(key)=>{
-        uniqueKey=key;
+    socket.on('unique-id',id=>{
+        uniqueId=id;
+        client.subscribe(id);
     });
     socket.on('new user',(message)=>{
         fs.writeFile('./data/userlist.txt',message,(err)=>{
@@ -39,10 +39,6 @@ io.on('connection',(socket)=>{
             }
         });
         let list=message.toString().split(',');
-        client.subscribe(list[list.length-1],err=>{
-            if(err)
-            console.error(err);
-        });
         fs.writeFile('./data/'+list[list.length-1]+'.txt','',(err)=>{
             if(err)
             console.error(err);
@@ -52,14 +48,6 @@ io.on('connection',(socket)=>{
         fs.readFile('./data/userlist.txt',(err, data)=>{
             if(err)
             return console.error(err);
-            let users=data.toString().split(',');
-            users.forEach(user=>{
-                if(user!='')
-                client.subscribe(user,(err)=>{
-                    if(err)
-                    console.error(err)
-                });
-            });
             socket.emit('user list',data.toString());
         });
     });
