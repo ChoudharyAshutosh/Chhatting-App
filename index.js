@@ -33,7 +33,7 @@ io.on('connection',(socket)=>{
         client.subscribe(id);
     });
     socket.on('new user',(message)=>{
-        fs.writeFile('./data/userlist.txt',message,(err)=>{
+        fs.writeFile('./data/userlist.txt',message.toString(),(err)=>{
             if(err){
                 return console.error(err);
             }
@@ -45,7 +45,7 @@ io.on('connection',(socket)=>{
         });    
     });
     socket.on('remove connection',message=>{
-        fs.writeFile('./data/userlist.txt',message,(err)=>{
+        fs.writeFile('./data/userlist.txt',message.toString(),(err)=>{
             if(err){
                 return console.error(err);
             }
@@ -83,12 +83,12 @@ io.on('connection',(socket)=>{
             isnull=false;
         });
         if(isnull===true){
-        fs.writeFile('./data/'+message[0]+'.txt',message[1],(err)=>{
+        fs.writeFile('./data/'+message[0]+'.txt',message[1].toString(),(err)=>{
             if(err)
             console.error(err);
         });}
         else{
-            fs.appendFile('./data/'+message[0]+'.txt',message[1],(err)=>{
+            fs.appendFile('./data/'+message[0]+'.txt',message[1].toString(),(err)=>{
                 if(err)
                 console.error(err);
             });}
