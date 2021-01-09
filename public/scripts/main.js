@@ -75,7 +75,7 @@ function deleteConnection(user){
         });
         if(isNewUser==true && chattingWith=='')
         {let users=document.getElementById('users');
-        users.innerHTML+='<div class="user-chat-link-container"><div class="user-chat-link" onclick="move(innerHTML);">'+message[0]+'</div><button class="button delete-button" onclick="deleteConnection(value)" value='+message[0]+'><i class="fa fa-trash"></button></div>';
+            users.innerHTML+='<div class="user-chat-link-container"><div class="user-chat-link" onclick="move(innerHTML);">'+message[0]+'</div><button class="button delete-button" onclick="deleteConnection(value)" value='+message[0]+'><i class="fa fa-trash"></button></div>';
             userList.push(message[0]);
             socket.emit('new user',userList);
             socket.emit('user chat',message[0]+':'+'<div id="left-container"><p id="left">'+message[1]+'</p></div>');
