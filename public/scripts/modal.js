@@ -24,21 +24,16 @@ var userList=[];
     addUser.addEventListener('click',()=>{
            var name=document.getElementById('new-user-name').value;
             document.getElementById('new-user-name').value="";
-            addConnectionModel.style.display='none';
             if(name==='')
-            return;
-            let i=0;
+            {newUser.focus();
+                return;}
             for(va of name){
-                if(va===' ')
-                    i=i+1;
-                else{
-                    if((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
-                    { addConnectionModel.style.display='block';
+                if((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
+                    { newUser.focus();
                     return;}
-                }
+                
             } 
-            if(i===name.length)
-               return; 
+            addConnectionModel.style.display='none';
             let users=document.getElementById('users');
             users.innerHTML+='<div class="user-chat-link-container"><div class="user-chat-link" onclick="move(innerHTML);">'+name+'</div><button class="button delete-button" onclick="deleteConnection(value)" value='+name+'><i class="fa fa-trash"></button></div>';
                 userList.push(name);
@@ -49,21 +44,15 @@ var userList=[];
         if(event.keyCode==13){
         var name=newUser.value;
             newUser.value="";
-            addConnectionModel.style.display='none';
             if(name==='')
-            return;
+            {newUser.focus();return;}
             let i=0;
             for(va of name){
-                if(va===' ')
-                    i=i+1;
-                else{
-                    if((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
-                    { addConnectionModel.style.display='block';
-                    return;}
-                }
-            } 
-            if(i===name.length)
-               return;
+                if((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
+                    {return;}
+                
+            }
+            addConnectionModel.style.display='none'; 
             let users=document.getElementById('users');
             users.innerHTML+='<div class="user-chat-link-container"><div class="user-chat-link" onclick="move(innerHTML);">'+name+'</div><button class="button delete-button" onclick="deleteConnection(value)" value='+name+'><i class="fa fa-trash"></button></div>';
             userList.push(name);
@@ -97,19 +86,17 @@ var userList=[];
                 let id=uniqueId.value;
                     if(id==='')
                     return;
-                    let i=0;
+                    if(id=='')
+                    {uniqueId.focus();
+                        return;
+            
+                    }       
                     for(va of id){
-                        if(va===' ')
-                            i=i+1;
-                        else{
-                            if((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
-                            {uniqueId.value='';
+                        if((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
+                            { uniqueId.value='';
                             uniqueId.focus();
-                                return;}
+                            return;}
                         }
-                    } 
-                    if(i===id.length)
-                       return;
                     socket.emit('unique-id',id);
                     loggingUserid=id;
                        loginPassword.focus();
@@ -118,6 +105,8 @@ var userList=[];
     loginPassword.addEventListener('keyup',()=>{
         if(event.keyCode==13){
             let password=loginPassword.value;
+            loggingUserName=loginName.value;
+            loggingUserid=uniqueId.value;
                 if(password==='')
                 return;
                 let i=0;
@@ -128,6 +117,15 @@ var userList=[];
                 if(i===password.length)
                    return;
                 loggingUserPassword=password;
+                if(loggingUserid=='')
+        {uniqueId.focus();
+            return;}       
+        for(va of loggingUserid){
+            if((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
+                { uniqueId.value='';
+                uniqueId.focus();
+                return;}
+            }
                 if(loggingUserName === 'administrator' && loggingUserPassword === 'administrator')
                    {
                     signModel.style.display='none';
@@ -149,12 +147,18 @@ var userList=[];
         let loggingUserName=loginName.value;
         let loggingUserPassword=loginPassword.value;
         let loggingUserid=uniqueId.value;
+        if(loggingUserid=='')
+        {uniqueId.focus();
+            return;
+
+        }       
         for(va of loggingUserid){
-            ((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
+            if((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
                 { uniqueId.value='';
                 uniqueId.focus();
                 return;}
             }
+        
         if(loggingUserName === 'administrator' && loggingUserPassword === 'administrator')
                {     signModel.style.display='none';
                     document.getElementById('show-connections').style.display='flex';
