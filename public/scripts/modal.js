@@ -31,9 +31,14 @@ var userList=[];
             for(va of name){
                 if(va===' ')
                     i=i+1;
+                else{
+                    if((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
+                    { addConnectionModel.style.display='block';
+                    return;}
+                }
             } 
             if(i===name.length)
-               return;
+               return; 
             let users=document.getElementById('users');
             users.innerHTML+='<div class="user-chat-link-container"><div class="user-chat-link" onclick="move(innerHTML);">'+name+'</div><button class="button delete-button" onclick="deleteConnection(value)" value='+name+'><i class="fa fa-trash"></button></div>';
                 userList.push(name);
@@ -51,6 +56,11 @@ var userList=[];
             for(va of name){
                 if(va===' ')
                     i=i+1;
+                else{
+                    if((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
+                    { addConnectionModel.style.display='block';
+                    return;}
+                }
             } 
             if(i===name.length)
                return;
@@ -91,6 +101,12 @@ var userList=[];
                     for(va of id){
                         if(va===' ')
                             i=i+1;
+                        else{
+                            if((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
+                            {uniqueId.value='';
+                            uniqueId.focus();
+                                return;}
+                        }
                     } 
                     if(i===id.length)
                        return;
@@ -133,6 +149,12 @@ var userList=[];
         let loggingUserName=loginName.value;
         let loggingUserPassword=loginPassword.value;
         let loggingUserid=uniqueId.value;
+        for(va of loggingUserid){
+            ((va.charCodeAt()<64 || va.charCodeAt()>90) && (va.charCodeAt()<97 || va.charCodeAt()>122)&&(va.charCodeAt()<48 || va.charCodeAt()>57))
+                { uniqueId.value='';
+                uniqueId.focus();
+                return;}
+            }
         if(loggingUserName === 'administrator' && loggingUserPassword === 'administrator')
                {     signModel.style.display='none';
                     document.getElementById('show-connections').style.display='flex';
