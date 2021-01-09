@@ -97,7 +97,6 @@ var userList=[];
                             uniqueId.focus();
                             return;}
                         }
-                    socket.emit('unique-id',id);
                     loggingUserid=id;
                        loginPassword.focus();
                     }
@@ -127,7 +126,7 @@ var userList=[];
                 return;}
             }
                 if(loggingUserName === 'administrator' && loggingUserPassword === 'administrator')
-                   {
+                   {socket.emit('unique-id',loggingUserid);
                     signModel.style.display='none';
                     document.getElementById('show-connections').style.display='flex';
                     document.getElementById('welcome-heading').innerHTML+= ' '+loggingUserid;   
@@ -160,7 +159,8 @@ var userList=[];
             }
         
         if(loggingUserName === 'administrator' && loggingUserPassword === 'administrator')
-               {     signModel.style.display='none';
+               {   socket.emit('unique-id',loggingUserid); 
+                   signModel.style.display='none';
                     document.getElementById('show-connections').style.display='flex';
                     document.getElementById('welcome-heading').innerHTML+= ' '+loggingUserid;
                 }
