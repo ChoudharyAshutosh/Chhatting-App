@@ -129,7 +129,9 @@ var userList=[];
                    {socket.emit('unique-id',loggingUserid);
                     signModel.style.display='none';
                     document.getElementById('show-connections').style.display='flex';
-                    document.getElementById('welcome-heading').innerHTML+= ' '+loggingUserid;   
+                    document.getElementById('welcome-heading').innerHTML+= ' '+loggingUserid;
+                    if(userList.length>5)
+                    document.getElementById('search-box').focus();   
                 }
                 else{
                     alert('Please enter valid user name & password.');
@@ -163,6 +165,8 @@ var userList=[];
                    signModel.style.display='none';
                     document.getElementById('show-connections').style.display='flex';
                     document.getElementById('welcome-heading').innerHTML+= ' '+loggingUserid;
+                    if(userList.length>5)
+                    document.getElementById('search-box').focus();
                 }
         else{
             alert('Please enter valid user name & password.');
