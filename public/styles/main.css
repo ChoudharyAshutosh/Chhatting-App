@@ -8,8 +8,8 @@ body{
     background-image: url('../images/662737.jpg');
     background-position:top;
     background-size: 100%; 
-  background-repeat: no-repeat;
-  background-size:center;
+    background-repeat: no-repeat;
+    background-size:center;
     padding: 0%;
 }
 body::-webkit-scrollbar-track
